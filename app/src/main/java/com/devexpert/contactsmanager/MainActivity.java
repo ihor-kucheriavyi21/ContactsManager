@@ -1,14 +1,65 @@
 package com.devexpert.contactsmanager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.devexpert.contactsmanager.databinding.ActivityMainBinding;
+import com.devexpert.contactsmanager.db.Contact;
+import com.devexpert.contactsmanager.db.ContactDatabase;
+import com.devexpert.contactsmanager.db.MyViewModel;
+import com.devexpert.contactsmanager.ui.ContactAdapter;
+import com.devexpert.contactsmanager.ui.MainActivityClickHandlers;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ContactDatabase contactDatabase;
+    private ArrayList<Contact> contactsList = new ArrayList<>();
+
+    private ContactAdapter contactAdapter;
+
+    private ActivityMainBinding mainBinding;
+    private MainActivityClickHandlers handlers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        handlers = new MainActivityClickHandlers(this);
+
+        RecyclerView recyclerView = mainBinding.recyclerView;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+
+
+        contactDatabase = ContactDatabase.getInstance(this);
+
+        MyViewModel viewModel = new ViewModelProvider(this)
+                .get(MyViewModel.class);
+
+        Contact c1 = new Contact("Ihor", "ihor@gmail.com");
+        // viewModel.addNewContact(c1);
+
+        viewModel.getAllContacts().observe(this, contacts -> {
+            for (Contact c : contacts) {
+                Log.v("TAGY", c.getName());
+                contactsList.add(c);
+            }
+
+            contactAdapter.notifyDataSetChanged();
+        });
+
+        contactAdapter = new ContactAdapter(contactsList);
+
+        recyclerView.setAdapter(contactAdapter);
     }
 }

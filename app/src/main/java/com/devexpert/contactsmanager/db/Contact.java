@@ -1,6 +1,5 @@
 package com.devexpert.contactsmanager.db;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -12,8 +11,7 @@ public class Contact {
     private String name;
     private String email;
 
-    public Contact(int id, String name, String email) {
-        this.id = id;
+    public Contact(String name, String email) {
         this.name = name;
         this.email = email;
     }

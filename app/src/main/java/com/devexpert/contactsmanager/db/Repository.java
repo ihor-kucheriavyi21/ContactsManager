@@ -14,7 +14,7 @@ public class Repository {
 
     private final ContactDAO contactDAO;
     private final ExecutorService executorService;
-    private  Handler handler;
+    private final Handler handler;
 
     public Repository(Application application) {
         ContactDatabase contactDatabase = ContactDatabase.getInstance(application);
@@ -25,12 +25,11 @@ public class Repository {
     }
 
     public void addContact(Contact contact) {
-
         executorService.execute(() -> contactDAO.insert(contact));
     }
 
     public void deleteContact(Contact contact) {
-        executorService.execute(()->        contactDAO.delete(contact));
+        executorService.execute(() -> contactDAO.delete(contact));
     }
 
     public LiveData<List<Contact>> getAllContacts() {
