@@ -3,9 +3,11 @@ package com.devexpert.contactsmanager;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,5 +65,18 @@ public class MainActivity extends AppCompatActivity {
         contactAdapter = new ContactAdapter(contactsList);
 
         recyclerView.setAdapter(contactAdapter);
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Contact c = contactsList.get(viewHolder.getAdapterPosition());
+                viewModel.deleteContact(c);
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 }
