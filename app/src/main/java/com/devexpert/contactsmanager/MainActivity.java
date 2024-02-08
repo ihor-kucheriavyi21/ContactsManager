@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         handlers = new MainActivityClickHandlers(this);
+        mainBinding.setClickHandler(handlers);
 
         RecyclerView recyclerView = mainBinding.recyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         // viewModel.addNewContact(c1);
 
         viewModel.getAllContacts().observe(this, contacts -> {
+            contactsList.clear();
             for (Contact c : contacts) {
                 Log.v("TAGY", c.getName());
                 contactsList.add(c);

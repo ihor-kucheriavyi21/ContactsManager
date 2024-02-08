@@ -2,4 +2,7 @@
     <string name="app_name">ContactsManager</string>
     <string name="email">Email</string>
     <string name="name">Name</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="add_contact">Add contact</string>
 </resources>
