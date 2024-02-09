@@ -10,18 +10,15 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Repository {
+public class ContactRepository {
 
     private final ContactDAO contactDAO;
     private final ExecutorService executorService;
-    private final Handler handler;
 
-    public Repository(Application application) {
+    public ContactRepository(Application application) {
         ContactDatabase contactDatabase = ContactDatabase.getInstance(application);
         this.contactDAO = contactDatabase.getContactDAO();
         executorService = Executors.newSingleThreadExecutor();
-        handler = new Handler(Looper.getMainLooper());
-
     }
 
     public void addContact(Contact contact) {

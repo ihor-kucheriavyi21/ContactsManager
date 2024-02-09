@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.devexpert.contactsmanager.db.Contact;
-import com.devexpert.contactsmanager.db.MyViewModel;
+import com.devexpert.contactsmanager.db.ContactViewModel;
 import com.devexpert.contactsmanager.ui.ContactAdapter;
 import com.devexpert.contactsmanager.ui.MainActivityClickHandlers;
 
@@ -38,11 +38,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
 
-        MyViewModel viewModel = new ViewModelProvider(this)
-                .get(MyViewModel.class);
+        ContactViewModel viewModel = new ViewModelProvider(this)
+                .get(ContactViewModel.class);
 
-        Contact c1 = new Contact("Ihor", "ihor@gmail.com");
-        // viewModel.addNewContact(c1);
+        /*Contact c1 = new Contact("Ihor", "ihor@gmail.com");
+        Contact c2 = new Contact("Vasyl", "vasyl@gmail.com");
+        Contact c3 = new Contact("Oleh", "oleh@gmail.com");
+        Contact c4 = new Contact("Alex", "alex@gmail.com");
+
+        viewModel.addNewContact(c1);
+        viewModel.addNewContact(c2);
+        viewModel.addNewContact(c3);
+        viewModel.addNewContact(c4);*/
+
 
         viewModel.getAllContacts().observe(this, contacts -> {
             contactsList.clear();

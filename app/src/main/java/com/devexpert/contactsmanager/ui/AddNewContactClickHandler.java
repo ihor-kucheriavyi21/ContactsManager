@@ -7,24 +7,24 @@ import android.widget.Toast;
 
 import com.devexpert.contactsmanager.MainActivity;
 import com.devexpert.contactsmanager.db.Contact;
-import com.devexpert.contactsmanager.db.MyViewModel;
+import com.devexpert.contactsmanager.db.ContactViewModel;
 
 public class AddNewContactClickHandler {
 
     Contact contact;
     Context context;
-    MyViewModel viewModel;
+    ContactViewModel viewModel;
 
     public AddNewContactClickHandler(Contact contact, Context context,
-                                     MyViewModel myViewModel) {
+                                     ContactViewModel contactViewModel) {
         this.contact = contact;
         this.context = context;
-        this.viewModel = myViewModel;
+        this.viewModel = contactViewModel;
     }
 
     public void onSubmitBtnClicked(View view) {
         if (contact.getName() == null || contact.getEmail() == null) {
-            Toast.makeText(context, "Fields cannot be empty", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
         } else {
             Intent intent = new Intent(context, MainActivity.class);
           /*  intent.putExtra("Name", contact.getName());

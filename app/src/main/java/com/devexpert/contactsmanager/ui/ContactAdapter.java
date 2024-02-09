@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    private ArrayList<Contact> contacts;
+    private final ArrayList<Contact> contacts;
 
     public ContactAdapter(ArrayList<Contact> contacts) {
         this.contacts = contacts;
@@ -39,21 +39,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public int getItemCount() {
-
         if (contacts != null)
             return contacts.size();
         else
             return 0;
     }
 
-    public void setContacts(ArrayList<Contact> contacts) {
-        this.contacts = contacts;
-        notifyDataSetChanged();
-    }
+    static class ContactViewHolder extends RecyclerView.ViewHolder {
 
-    class ContactViewHolder extends RecyclerView.ViewHolder {
-
-        private ContactListItemBinding contactListItemBinding;
+        private final ContactListItemBinding contactListItemBinding;
 
         public ContactViewHolder(ContactListItemBinding contactListItemBinding) {
             super(contactListItemBinding.getRoot());

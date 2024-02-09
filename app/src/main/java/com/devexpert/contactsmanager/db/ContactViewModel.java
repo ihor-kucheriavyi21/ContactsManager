@@ -8,24 +8,24 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class MyViewModel extends AndroidViewModel {
+public class ContactViewModel extends AndroidViewModel {
 
-    private final Repository myRepository;
+    private final ContactRepository myContactRepository;
 
-    public MyViewModel(@NonNull Application application) {
+    public ContactViewModel(@NonNull Application application) {
         super(application);
-        this.myRepository = new Repository(application);
+        this.myContactRepository = new ContactRepository(application);
     }
 
     public LiveData<List<Contact>> getAllContacts() {
-        return myRepository.getAllContacts();
+        return myContactRepository.getAllContacts();
     }
 
     public void addNewContact(Contact contact) {
-        myRepository.addContact(contact);
+        myContactRepository.addContact(contact);
     }
 
     public void deleteContact(Contact contact) {
-        myRepository.deleteContact(contact);
+        myContactRepository.deleteContact(contact);
     }
 }
